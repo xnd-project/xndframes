@@ -1,0 +1,41 @@
+=========
+xndframes
+=========
+
+
+.. image:: https://img.shields.io/pypi/v/xndframes.svg
+        :target: https://pypi.python.org/pypi/xndframes
+
+.. image:: https://img.shields.io/travis/andersy005/xndframes.svg
+        :target: https://travis-ci.org/andersy005/xndframes
+
+.. image:: https://readthedocs.org/projects/xndframes/badge/?version=latest
+        :target: https://xndframes.readthedocs.io/en/latest/?badge=latest
+        :alt: Documentation Status
+
+
+.. image:: https://pyup.io/repos/github/andersy005/xndframes/shield.svg
+     :target: https://pyup.io/repos/github/andersy005/xndframes/
+     :alt: Updates
+
+
+
+Pandas ExtensionDType/Array backed by xnd
+
+
+* Free software: BSD license
+* Documentation: https://xndframes.readthedocs.io.
+
+
+Features
+--------
+
+* TODO
+
+Credits
+-------
+
+This package was created with Cookiecutter_ and the `audreyr/cookiecutter-pypackage`_ project template.
+
+.. _Cookiecutter: https://github.com/audreyr/cookiecutter
+.. _`audreyr/cookiecutter-pypackage`: https://github.com/audreyr/cookiecutter-pypackage
