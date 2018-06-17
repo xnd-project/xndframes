@@ -24,3 +24,6 @@ deploy:
     tags: true
     repo: andersy005/xndframes
     python: 3.6
+
+notifications:
+  email: false
