@@ -18,6 +18,9 @@ xndframes
      :target: https://pyup.io/repos/github/andersy005/xndframes/
      :alt: Updates
 
+.. image:: https://codecov.io/gh/andersy005/xndframes/branch/master/graph/badge.svg
+      :target: https://codecov.io/gh/andersy005/xndframes
+      :alt: codecov
 
 
 Pandas ExtensionDType/Array backed by xnd
