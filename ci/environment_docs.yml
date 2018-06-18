@@ -1,0 +1,17 @@
+name: xndframes-docs
+channels:
+  - conda-forge
+dependencies:
+  - coverage
+  - flake8
+  - ipython
+  - matplotlib
+  - numpy
+  - numpydoc
+  - pandas >=0.23.0
+  - pytest
+  - pytest-cov
+  - python=3.6
+  - six
+  - sphinx
+  - sphinx_rtd_theme
