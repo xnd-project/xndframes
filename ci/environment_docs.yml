@@ -1,6 +1,7 @@
 name: xndframes-docs
 channels:
   - conda-forge
+  - xnd/label/dev
 dependencies:
   - coverage
   - flake8
@@ -15,3 +16,4 @@ dependencies:
   - six
   - sphinx
   - sphinx_rtd_theme
+  - xnd
