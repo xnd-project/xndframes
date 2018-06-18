@@ -38,7 +38,7 @@ class StringArray(XndframesArrayBase):
             self.data = xnd.xnd.from_buffer(array)
 
         elif isinstance(array, xnd.xnd):
-            self.data = array 
+            self.data = array
         else:
             raise ValueError(
                 "Unsupported type passed for StringArray: {}".format(
