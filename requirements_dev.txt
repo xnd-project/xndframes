@@ -8,5 +8,5 @@ coverage
 Sphinx
 twine
 
-pytest
+pytest==3.6.1
 pytest-runner
