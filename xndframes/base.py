@@ -1,7 +1,7 @@
 from __future__ import absolute_import, division, print_function
 
 from collections import Iterable
-
+import itertools
 import ndtypes
 import numpy as np
 import pandas as pd
@@ -12,6 +12,8 @@ import xnd
 
 
 class XndframesArrayBase(ExtensionArray):
+    _can_hold_na = True
+
     def __array__(self):
         """
         Construct numpy arrays when passed to `np.asarray()`.
@@ -23,6 +25,22 @@ class XndframesArrayBase(ExtensionArray):
         Length of this array
         """
         return len(self.data)
+
+    @classmethod
+    def _concat_same_type(cls, to_concat):
+        """
+        Concatenate multiple arrays
+
+        Parameters
+        ----------
+        to_concat : sequence of this type
+
+        Returns
+        ----------
+        ExtensionArray
+        """
+        return cls(xnd.xnd(list(itertools.chain(to_concat))))
+
 
     def __getitem__(self, item):
         """Select subset of self.
@@ -94,6 +112,20 @@ class XndframesArrayBase(ExtensionArray):
 
         return type(self)(self.data)
 
+    def isna(self):
+        """
+        Boolean NumPy array indicating if each value is missing. 
+        This should return a 1-D array the same length as 'self'.
+        """
+        size = len(self.data)
+        isnull_byte_map = np.zeros(size, dtype=bool)
+        for i in range(size):
+            if self.data[i] is None:
+                isnull_byte_map[i] = 1
+                
+        return isnull_byte_map
+
+
     @property
     def nbytes(self):
         """
@@ -119,7 +151,7 @@ class XndframesArrayBase(ExtensionArray):
         return self.data
 
     def factorize(self, na_sentinel=-1):
-        np_array = np.asarray(xnd.xnd(self.data))
+        np_array = np.asarray(self.data)
         return pd.factorize(np_array, na_sentinel=na_sentinel)
 
     def astype(self, dtype, copy=True):
