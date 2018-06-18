@@ -8,7 +8,7 @@ import pandas as pd
 from pandas.api.types import (is_array_like, is_bool_dtype, is_integer,
                               is_integer_dtype)
 from pandas.core.arrays import ExtensionArray
-from xnd import xnd
+import xnd
 
 
 class XndframesArrayBase(ExtensionArray):
@@ -16,7 +16,7 @@ class XndframesArrayBase(ExtensionArray):
         """
         Construct numpy arrays when passed to `np.asarray()`.
         """
-        return np.asarray(xnd(self.data))
+        return np.asarray(self.data)
 
     def __len__(self):
         """
@@ -53,7 +53,7 @@ class XndframesArrayBase(ExtensionArray):
             stop = item.stop if item.stop is not None else len(self.data)
             stop = min(stop, len(self.data))
             if stop - start == 0:
-                return type(self)(xnd([], type=self.data.type))
+                return type(self)(xnd.xnd([], type=self.data.type))
 
         elif isinstance(item, Iterable):
             if not is_array_like(item):
@@ -119,7 +119,7 @@ class XndframesArrayBase(ExtensionArray):
         return self.data
 
     def factorize(self, na_sentinel=-1):
-        np_array = np.asarray(xnd(self.data))
+        np_array = np.asarray(xnd.xnd(self.data))
         return pd.factorize(np_array, na_sentinel=na_sentinel)
 
     def astype(self, dtype, copy=True):
@@ -166,7 +166,7 @@ class XndframesArrayBase(ExtensionArray):
         -------
         ExtensionArray
         """
-        return cls(xnd(scalars))
+        return cls(xnd.xnd(scalars))
 
     def take(self, indices, allow_fill=False, fill_value=None):
         from pandas.core.algorithms import take
