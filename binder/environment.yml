@@ -1,0 +1,24 @@
+name: xnd-env
+channels:
+  - conda-forge
+  - xnd/label/dev
+
+dependencies:
+  - python==3.6
+  - numpy
+  - gumath
+  - xnd
+  - matplotlib
+  - cycler
+  - importnb
+  - numba
+  - jupyterlab
+  - pytest
+  - scipy
+  - pyarrow
+  - pandas 
+  - line_profiler
+  - snakeviz
+  - pip:
+    - version-information
+    - git+https://github.com/andersy005/xndframes.git
