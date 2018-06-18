@@ -23,7 +23,7 @@ xndframes
 Pandas ExtensionDType/Array backed by xnd
 
 
-* Free software: [BSD license](./LICENSE)
+* Free software: BSD license
 * Documentation: https://xndframes.readthedocs.io.
 
 
