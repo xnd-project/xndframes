@@ -30,3 +30,9 @@ Features
 
 * TODO
 
+Try xndframes in the cloud
+--------------------------
+
+To try out xndframes interactively in your web browser, just click on the binder link:
+
+.. image:: https://mybinder.org/badge.svg :target: https://mybinder.org/v2/gh/andersy005/xndframes/master
