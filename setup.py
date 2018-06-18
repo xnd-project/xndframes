@@ -4,7 +4,7 @@
 """The setup script."""
 
 from setuptools import setup, find_packages
-import versioneer 
+import versioneer
 
 with open('README.rst') as readme_file:
     readme = readme_file.read()
@@ -12,7 +12,9 @@ with open('README.rst') as readme_file:
 with open('HISTORY.rst') as history_file:
     history = history_file.read()
 
-requirements = ['Click>=6.0', ]
+requirements = ["pandas>=0.23.0",
+                "six",
+                "xnd"]
 
 setup_requirements = ['pytest-runner', ]
 
@@ -20,7 +22,7 @@ test_requirements = ['pytest', ]
 
 setup(
     maintainer="Anderson Banihirwe",
-    maintainer='axbanihirwe@gmail.com',
+    maintainer_email='axbanihirwe@gmail.com',
     classifiers=[
         'Development Status :: 2 - Pre-Alpha',
         'Intended Audience :: Developers',
@@ -29,11 +31,6 @@ setup(
         'Programming Language :: Python :: 3.6',
     ],
     description="Pandas ExtensionDType/Array backed by xnd",
-    entry_points={
-        'console_scripts': [
-            'xndframes=xndframes.cli:main',
-        ],
-    },
     install_requires=requirements,
     license="BSD license",
     long_description=readme + '\n\n' + history,

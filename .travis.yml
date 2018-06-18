@@ -4,26 +4,59 @@ language: python
 python:
   - 3.6
 
-# Command to install dependencies, e.g. pip install -r requirements.txt --use-mirrors
-install: pip install -U tox-travis
+before_install:
+  - sudo apt-get update
+  # We do this conditionally because it saves us some downloading if the
+  # version is the same.
+  - if [[ "$TRAVIS_PYTHON_VERSION" == "2.7" ]]; then
+      wget https://repo.continuum.io/miniconda/Miniconda2-latest-Linux-x86_64.sh -O miniconda.sh;
+    else
+      wget https://repo.continuum.io/miniconda/Miniconda3-latest-Linux-x86_64.sh -O miniconda.sh;
+    fi
+  - bash miniconda.sh -b -p $HOME/miniconda
+  - export PATH="$HOME/miniconda/bin:$PATH"
+  - hash -r
+  - conda config --set always_yes yes --set changeps1 no
+  - conda update -q conda
+  # Useful for debugging any issues with conda
+  - conda info -a
 
+
+# Command to install dependencies, e.g. pip install -r requirements.txt --use-mirrors
+#install: pip install -U tox-travis
+install:
+  - conda env create -f ./ci/environment.yml
+  - source activate xndframes
+  # Install the package:
+  #- python setup.py install
+  - echo
+  - echo "[install xndframes]"
+  - pip install --no-deps -e .
 # Command to run tests, e.g. python setup.py test
-script: tox
+#script: tox
+
+script:
+  - py.test --junitxml=test-reports/junit.xml --cov=./
+  - black --check
+
+after_success:
+  - bash <(curl -s https://codecov.io/bash)
+  - codecov
 
 # Assuming you have installed the travis-ci CLI tool, after you
 # create the Github repo and add it to Travis, run the
 # following command to finish PyPI deployment setup:
 # $ travis encrypt --add deploy.password
-deploy:
-  provider: pypi
-  distributions: sdist bdist_wheel
-  user: andersy005
-  password:
-    secure: PLEASE_REPLACE_ME
-  on:
-    tags: true
-    repo: andersy005/xndframes
-    python: 3.6
+# deploy:
+#  provider: pypi
+#  distributions: sdist bdist_wheel
+#  user: andersy005
+#  password:
+#    secure: PLEASE_REPLACE_ME
+#  on:
+#    tags: true
+#    repo: andersy005/xndframes
+#    python: 3.6
 
 notifications:
   email: false
