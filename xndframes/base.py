@@ -1,14 +1,15 @@
 from __future__ import absolute_import, division, print_function
 
-from collections import Iterable
 import itertools
+from collections import Iterable
+
 import ndtypes
 import numpy as np
 import pandas as pd
+import xnd
 from pandas.api.types import (is_array_like, is_bool_dtype, is_integer,
                               is_integer_dtype)
 from pandas.core.arrays import ExtensionArray
-import xnd
 
 
 class XndframesArrayBase(ExtensionArray):
@@ -40,7 +41,6 @@ class XndframesArrayBase(ExtensionArray):
         ExtensionArray
         """
         return cls(xnd.xnd(list(itertools.chain(to_concat))))
-
 
     def __getitem__(self, item):
         """Select subset of self.
@@ -114,7 +114,7 @@ class XndframesArrayBase(ExtensionArray):
 
     def isna(self):
         """
-        Boolean NumPy array indicating if each value is missing. 
+        Boolean NumPy array indicating if each value is missing.
         This should return a 1-D array the same length as 'self'.
         """
         size = len(self.data)
@@ -122,9 +122,8 @@ class XndframesArrayBase(ExtensionArray):
         for i in range(size):
             if self.data[i] is None:
                 isnull_byte_map[i] = 1
-                
-        return isnull_byte_map
 
+        return isnull_byte_map
 
     @property
     def nbytes(self):
@@ -201,12 +200,64 @@ class XndframesArrayBase(ExtensionArray):
         return cls(xnd.xnd(scalars))
 
     def take(self, indices, allow_fill=False, fill_value=None):
+        """
+        Take elements from an array.
+
+        Parameters
+        ----------
+        indices : sequence of integers
+             Indices to be taken.
+        allow_fill : bool, default False
+              How to handle negative values in `indices`.
+              * False: negative values in `indices` indicate position indices
+                from the right (the default). This is similar to
+                :func:`numpy.take`.
+              * True: negative values in `indices` indicate missing values.
+                These values are set to `fill_value`. Any other negative values
+                raise a ``ValueError``.
+        fill_value : any, optional
+              Fill value to use for NA-indices when `allow_fill` is True.
+              This may be ``None``, in which case the default NA value for the
+              type, ``self.dtype.na_value``, is used.
+              For many ExtensionArrays, there will be two representations of
+              `fill_value`: a user-facing "boxed" scalar, and
+              a low-level physical NA value. `fill_value` should be the
+              user-facing version, and the implementation should
+              handle translating that to the physical version for
+              processing the take if necessary.
+
+        Returns
+        -------
+        ExtensionArray
+
+        Raises
+        ------
+        IndexError
+            When the indices are out of bounds for the array.
+        ValueError
+            When `indices` contain negative values other than ``-1``
+            and `allow_fill` is True.
+
+        Notes
+        -----
+        ExtensionArray.take is called by ``Series.__getitem__``, ``.loc``,
+        ``iloc``, when `indices` is a sequence of values. Additionally,
+        it's called by :meth:`Series.reindex`, or any other method
+        that causes realignemnt, with a `fill_value`.
+        See Also
+        --------
+        numpy.take
+        pandas.api.extensions.take
+
+        """
         from pandas.core.algorithms import take
 
         data = self.astype(object)
         if allow_fill and fill_value is None:
             fill_value = self.dtype.na_value
-
+        # fill value should always be translated from the scalar
+        # type for the array, to the physical storage type for
+        # the data, before passing to take.
         result = take(
             data,
             indices,
