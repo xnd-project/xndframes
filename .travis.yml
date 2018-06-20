@@ -37,7 +37,6 @@ install:
 
 script:
   - py.test --junitxml=test-reports/junit.xml --cov=./
-  - black --check . --quiet
 
 after_success:
   - bash <(curl -s https://codecov.io/bash)
