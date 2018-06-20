@@ -7,9 +7,9 @@ dependencies:
   - numpy 
   - pandas 
   - xnd
+  - gumath
   - pytest
   - black
   - pytest-cov
   - coverage
   - flake8
-  - six

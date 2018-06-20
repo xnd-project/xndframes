@@ -23,10 +23,7 @@ class StringDtype(ExtensionDtype):
         if string == "string":
             return cls()
         else:
-            raise TypeError(
-                "Cannot construct a '{}' from "
-                "'{}'".format(
-                    cls, string))
+            raise TypeError("Cannot construct a '{}' from " "'{}'".format(cls, string))
 
 
 class StringArray(XndframesArrayBase):
@@ -43,5 +40,5 @@ class StringArray(XndframesArrayBase):
             self.data = array
         else:
             raise ValueError(
-                "Unsupported type passed for StringArray: {}".format(
-                    type(array)))
+                "Unsupported type passed for StringArray: {}".format(type(array))
+            )

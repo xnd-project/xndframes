@@ -7,8 +7,7 @@ import ndtypes
 import numpy as np
 import pandas as pd
 import xnd
-from pandas.api.types import (is_array_like, is_bool_dtype, is_integer,
-                              is_integer_dtype)
+from pandas.api.types import is_array_like, is_bool_dtype, is_integer, is_integer_dtype
 from pandas.core.arrays import ExtensionArray
 
 
@@ -40,7 +39,9 @@ class XndframesArrayBase(ExtensionArray):
         ----------
         ExtensionArray
         """
-        return cls(xnd.xnd(list(itertools.chain(to_concat))))
+        interim_array = [array.data for array in to_concat]
+
+        return cls(xnd.xnd(list(itertools.chain(*interim_array))))
 
     def __getitem__(self, item):
         """Select subset of self.
@@ -149,9 +150,11 @@ class XndframesArrayBase(ExtensionArray):
         """
         return self.data
 
+    """
     def factorize(self, na_sentinel=-1):
         np_array = np.asarray(self.data)
         return pd.factorize(np_array, na_sentinel=na_sentinel)
+    """
 
     def astype(self, dtype, copy=True):
         """
@@ -258,9 +261,18 @@ class XndframesArrayBase(ExtensionArray):
         # fill value should always be translated from the scalar
         # type for the array, to the physical storage type for
         # the data, before passing to take.
-        result = take(
-            data,
-            indices,
-            fill_value=fill_value,
-            allow_fill=allow_fill)
+        result = take(data, indices, fill_value=fill_value, allow_fill=allow_fill)
         return self._from_sequence(result)
+
+    """
+    def argsort(self, axis=-1, kind='quicksort', order=None):
+        return np.sort(self.data)
+
+    def unique(self):
+        _, indices = np.unique(self.__array__(), return_index=True)
+        return self.data.take(np.sort(indices))
+    """
+
+    def factorize(self, na_sentinel=-1):
+        np_array = self.__array__()
+        return pd.factorize(np_array, na_sentinel=na_sentinel)

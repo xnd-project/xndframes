@@ -12,7 +12,7 @@ with open("README.rst") as readme_file:
 with open("HISTORY.rst") as history_file:
     history = history_file.read()
 
-requirements = ["pandas>=0.23.0", "six", "xnd"]
+requirements = ["pandas>=0.23.0", "gumath", "xnd"]
 
 setup_requirements = ["pytest-runner"]
 

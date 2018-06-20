@@ -13,7 +13,7 @@ dependencies:
   - pytest
   - pytest-cov
   - python=3.6
-  - six
   - sphinx
   - sphinx_rtd_theme
   - xnd
+  - gumath
