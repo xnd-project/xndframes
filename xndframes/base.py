@@ -7,7 +7,8 @@ import ndtypes
 import numpy as np
 import pandas as pd
 import xnd
-from pandas.api.types import is_array_like, is_bool_dtype, is_integer, is_integer_dtype
+from pandas.api.types import (is_array_like, is_bool_dtype, is_integer,
+                              is_integer_dtype)
 from pandas.core.arrays import ExtensionArray
 
 
@@ -58,7 +59,7 @@ class XndframesArrayBase(ExtensionArray):
         --------
         item: scalar or ExtensionArray
 
-         Notes
+        Notes
         -----
         For scalar ``item``, return a scalar value suitable for the array's
         type. This should be an instance of ``self.dtype.type``.
