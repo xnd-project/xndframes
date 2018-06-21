@@ -94,6 +94,12 @@ class XndframesArrayBase(ExtensionArray):
                 item += len(self)
             if item >= len(self):
                 return None
+            else:
+
+                return self.data[item]
+
+        value = self.data[item]
+        return type(self)(value)
 
     def copy(self, deep=False):
         """

@@ -52,3 +52,16 @@ def test_dataframe_from_series():
     c = pd.Series(pd.Categorical(['a', 'b']))
     result = pd.DataFrame({"A": s, "B": c})
     assert isinstance(result.dtypes["A"], xf.StringDtype)
+
+
+def test_getitem_scalar():
+    ser = pd.Series(xf.StringArray(TEST_ARRAY))
+    result = ser[1]
+    assert result == "string"
+
+
+def test_getitem_slice():
+    ser = pd.Series(xf.StringArray(TEST_ARRAY))
+    result = ser[1:]
+    expected = pd.Series(xf.StringArray(TEST_ARRAY[1:]), index=range(1, 3))
+    tm.assert_series_equal(result, expected)
