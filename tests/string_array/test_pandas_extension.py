@@ -3,8 +3,10 @@
 # import pytest
 import pandas as pd
 import pandas.testing as tm
-import xndframes as xf
 import xnd
+from pandas.core.internals import ExtensionBlock
+
+import xndframes as xf
 
 TEST_ARRAY = xnd.xnd(["Test", "string", None])
 
@@ -18,9 +20,35 @@ def test_concatenate_blocks():
     tm.assert_series_equal(result, expected)
 
 
+def test_series_constructor():
+    v = xf.StringArray(TEST_ARRAY)
+    result = pd.Series(v)
+    assert result.dtype == v.dtype
+    assert isinstance(result._data.blocks[0], ExtensionBlock)
+
+
 def test_dataframe_constructor():
     v = xf.StringArray(TEST_ARRAY)
     df = pd.DataFrame({"A": v})
     assert isinstance(df.dtypes["A"], xf.StringDtype)
     assert df.shape == (3, 1)
     str(df)
+
+
+def test_dataframe_from_series_no_dict():
+    s = pd.Series(xf.StringArray(TEST_ARRAY))
+    result = pd.DataFrame(s)
+    expected = pd.DataFrame({0: s})
+    tm.assert_frame_equal(result, expected)
+
+    s = pd.Series(xf.StringArray(TEST_ARRAY), name='A')
+    result = pd.DataFrame(s)
+    expected = pd.DataFrame({'A': s})
+    tm.assert_frame_equal(result, expected)
+
+
+def test_dataframe_from_series():
+    s = pd.Series(xf.StringArray(TEST_ARRAY))
+    c = pd.Series(pd.Categorical(['a', 'b']))
+    result = pd.DataFrame({"A": s, "B": c})
+    assert isinstance(result.dtypes["A"], xf.StringDtype)

@@ -9,8 +9,17 @@ def test_codestyle():
 
     style_guide = flake8.get_style_guide(max_line_length=88)
     report = style_guide.check_files(
-        glob.glob(os.path.abspath(os.path.join(basedir, "*.py")))
-        + glob.glob(os.path.abspath(os.path.join(basedir, "..", "xndframes", "*.py")))
-    )
+        glob.glob(
+            os.path.abspath(
+                os.path.join(
+                    basedir,
+                    "*.py"))) +
+        glob.glob(
+            os.path.abspath(
+                os.path.join(
+                    basedir,
+                    "..",
+                    "xndframes",
+                    "*.py"))))
 
     assert report.total_errors == 0
