@@ -7,9 +7,11 @@ This document describes how to use the methods and classes provided by ``xndfram
 We will assume that the following packages have been imported.
 
 .. ipython:: python
+
     import xndframes as xf 
     import pandas as pd 
     
+
 Pandas Integration
 ------------------
 
@@ -25,7 +27,7 @@ Series and DataFrame.
 
     ser = pd.Series(sa)
     ser 
-    df = pd.DataFrame({"strings": values})
+    df = pd.DataFrame({"strings": sa})
     df
 
 Most pandas methods that make sense should work. The following section will call 

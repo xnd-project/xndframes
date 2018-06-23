@@ -57,6 +57,7 @@ If you are proposing a feature:
 Get Started!
 ------------
 
+We strongly recommend using a `conda` based development setup.
 Ready to contribute? Here's how to set up `xndframes` for local development.
 
 1. Fork the `xndframes` repo on GitHub.
@@ -64,10 +65,11 @@ Ready to contribute? Here's how to set up `xndframes` for local development.
 
     $ git clone git@github.com:your_name_here/xndframes.git
 
-3. Install your local copy into a virtualenv. Assuming you have virtualenvwrapper installed, this is how you set up your fork for local development::
+3. Install your local copy into a `conda` environment. Assuming you have `conda` installed, this is how you set up your fork for local development::
 
-    $ mkvirtualenv xndframes
     $ cd xndframes/
+    $ conda env create -f ci/environment.yml
+    $ conda activate xndframes 
     $ python setup.py develop
 
 4. Create a branch for local development::
