@@ -35,5 +35,5 @@ Try xndframes in the cloud
 
 To try out xndframes interactively in your web browser, just click on the binder link:
 
-.. image:: ./assets/binder-logo.svg 
+.. image:: https://i.imgur.com/xzKbKkP.png
      :target: https://mybinder.org/v2/gh/andersy005/xndframes/master
