@@ -17,5 +17,4 @@ calling the Series method will dispatch to these methods.
 
 .. automethod:: StringArray.take 
 .. automethod:: StringArray.unique
-.. automethod:: StringArray.isin
 .. automethod:: StringArray.isna 
