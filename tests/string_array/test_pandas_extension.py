@@ -5,10 +5,10 @@ import pandas as pd
 import pandas.testing as tm
 import xnd
 from pandas.core.internals import ExtensionBlock
-
+import numpy as np
 import xndframes as xf
 
-TEST_ARRAY = xnd.xnd(["Test", "string", None])
+TEST_ARRAY = ["Test", "string", None]
 
 
 def test_concatenate_blocks():
@@ -55,9 +55,16 @@ def test_dataframe_from_series():
 
 
 def test_getitem_scalar():
-    ser = pd.Series(xf.StringArray(TEST_ARRAY))
+    sa = xf.StringArray(TEST_ARRAY)
+    ser = pd.Series(sa)
     result = ser[1]
-    assert result == "string"
+    assert result == sa.data[1]
+
+    result = ser[5]
+    assert result is None
+
+    result = ser[-3]
+    assert result == "Test"
 
 
 def test_getitem_slice():
@@ -65,3 +72,10 @@ def test_getitem_slice():
     result = ser[1:]
     expected = pd.Series(xf.StringArray(TEST_ARRAY[1:]), index=range(1, 3))
     tm.assert_series_equal(result, expected)
+
+
+def test_isna():
+    ser = pd.Series(xf.StringArray(TEST_ARRAY))
+    result = ser.isna().values
+    expected = np.array([False, False, True])
+    np.testing.assert_array_equal(result, expected)
