@@ -79,3 +79,41 @@ def test_isna():
     result = ser.isna().values
     expected = np.array([False, False, True])
     np.testing.assert_array_equal(result, expected)
+
+
+def test_copy():
+    ser = pd.Series(xf.StringArray(TEST_ARRAY))
+    copy = ser.copy()
+    tm.assert_series_equal(ser, copy)
+
+
+def test_nbytes():
+    sa = xf.StringArray(TEST_ARRAY)
+    result = sa.nbytes
+    expected = len(TEST_ARRAY) * 8
+    assert result == expected
+
+
+def test_factorize():
+    ser = pd.Series(xf.StringArray(TEST_ARRAY))
+    labels, uniques = ser.factorize()
+    expected_labels = np.array([0, 1, -1])
+    np.testing.assert_array_equal(labels, expected_labels)
+
+
+def test_astype():
+    ser = pd.Series(xf.StringArray(TEST_ARRAY))
+    as_ser = ser.astype('object')
+    result = as_ser.dtype
+    result is np.dtype('object')
+
+
+def test_size():
+    ser = pd.Series(xf.StringArray(TEST_ARRAY))
+    assert ser.size == len(TEST_ARRAY)
+
+
+def test_take():
+    ser = pd.Series(xf.StringArray(TEST_ARRAY))
+    result = ser.take([0, 2, 1])
+    assert isinstance(result, pd.Series)

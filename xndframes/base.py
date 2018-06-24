@@ -207,7 +207,7 @@ class XndframesArrayBase(ExtensionArray):
         -------
         ExtensionArray
         """
-        return cls(xnd.xnd(scalars))
+        return cls(xnd.xnd(list(scalars)))
 
     def take(self, indices, allow_fill=False, fill_value=None):
         """
