@@ -133,36 +133,6 @@ class XndframesArrayBase(ExtensionArray):
 
         return isnull_byte_map
 
-    @property
-    def nbytes(self):
-        """
-        Return total bytes consumed by the elements of the array..
-        Does not include memory consumed by non-element attributes
-        of the array object.
-        """
-
-        return self.data.type.datasize
-
-    @property
-    def size(self):
-        """
-        Return the number of elements in the underlying data.
-        """
-        return len(self.data)
-
-    @property
-    def base(self):
-        """
-        The base object of the underlying data.
-        """
-        return self.data
-
-    """
-    def factorize(self, na_sentinel=-1):
-        np_array = np.asarray(self.data)
-        return pd.factorize(np_array, na_sentinel=na_sentinel)
-    """
-
     def astype(self, dtype, copy=True):
         """
         Cast to a NumPy array with 'dtype'
@@ -275,15 +245,34 @@ class XndframesArrayBase(ExtensionArray):
             allow_fill=allow_fill)
         return self._from_sequence(result)
 
-    """
-    def argsort(self, axis=-1, kind='quicksort', order=None):
-        return np.sort(self.data)
-
-    def unique(self):
-        _, indices = np.unique(self.__array__(), return_index=True)
-        return self.data.take(np.sort(indices))
-    """
-
     def factorize(self, na_sentinel=-1):
         np_array = self.__array__()
         return pd.factorize(np_array, na_sentinel=na_sentinel)
+
+    # -----------------------------------------------------------
+    #                   Properties
+    # -----------------------------------------------------------
+
+    @property
+    def nbytes(self):
+        """
+        Return total bytes consumed by the elements of the array..
+        Does not include memory consumed by non-element attributes
+        of the array object.
+        """
+
+        return self.data.type.datasize
+
+    @property
+    def size(self):
+        """
+        Return the number of elements in the underlying data.
+        """
+        return len(self.data)
+
+    @property
+    def base(self):
+        """
+        The base object of the underlying data.
+        """
+        return self.data

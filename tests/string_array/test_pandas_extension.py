@@ -11,6 +11,15 @@ import xndframes as xf
 TEST_ARRAY = ["Test", "string", None]
 
 
+def test_constructors():
+    v1 = xf.StringArray(TEST_ARRAY)
+    assert isinstance(v1.dtype, xf.StringDtype)
+    v2 = xf.StringArray(np.array(TEST_ARRAY))
+    assert isinstance(v2.dtype, xf.StringDtype)
+    v3 = xf.StringArray(xnd.xnd(TEST_ARRAY))
+    assert isinstance(v3.dtype, xf.StringDtype)
+
+
 def test_concatenate_blocks():
     v1 = xf.StringArray(TEST_ARRAY)
     sa = pd.Series(v1)
@@ -71,6 +80,13 @@ def test_getitem_slice():
     ser = pd.Series(xf.StringArray(TEST_ARRAY))
     result = ser[1:]
     expected = pd.Series(xf.StringArray(TEST_ARRAY[1:]), index=range(1, 3))
+    tm.assert_series_equal(result, expected)
+
+
+def test_getitem_iterable():
+    ser = pd.Series(xf.StringArray(TEST_ARRAY))
+    result = ser[[0, 1]]
+    expected = pd.Series(xf.StringArray(TEST_ARRAY[0:2]), index=range(0, 2))
     tm.assert_series_equal(result, expected)
 
 
