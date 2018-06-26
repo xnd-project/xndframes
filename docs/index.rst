@@ -5,13 +5,11 @@ Welcome to xndframes's documentation!
    :maxdepth: 2
    :caption: Contents:
 
-   readme
    installation
    usage
    modules
    api
    contributing
-   authors
    history
 
 Indices and tables
