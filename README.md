@@ -1,8 +1,10 @@
 
 # xndframes
 
-[![Build Status](https://travis-ci.org/andersy005/xndframes.svg?branch=master)](https://travis-ci.org/andersy005/xndframes)
+[![Build Status](https://travis-ci.org/Quansight/xndframes.svg?branch=master)](https://travis-ci.org/Quansight/xndframes)
+
 [![Documentation Status](https://readthedocs.org/projects/xndframes/badge/?version=latest)](https://xndframes.readthedocs.io/en/latest)
+
 [![codecov](https://codecov.io/gh/andersy005/xndframes/branch/master/graph/badge.svg)](https://codecov.io/gh/andersy005/xndframes)
 
 Xndframes is a Python package that provides a set of Pandas ExtensionDType/Array implementations backed by [xnd](https://github.com/plures/xnd).
@@ -68,7 +70,7 @@ See the [documentation](https://xndframes.readthedocs.io) for more.
 
 To try out xndframes interactively in your web browser, just click on the binder link:
 
-[![Binder](https://i.imgur.com/xzKbKkP.png)](https://mybinder.org/v2/gh/andersy005/xndframes/master)
+[![Binder](https://i.imgur.com/xzKbKkP.png)](https://mybinder.org/v2/gh/Quansight/xndframes/master)
 
 ## Contributing
 
