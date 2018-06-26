@@ -1,7 +1,6 @@
 
 # xndframes
 
-
 [![Build Status](https://travis-ci.org/andersy005/xndframes.svg?branch=master)](https://travis-ci.org/andersy005/xndframes)
 [![Documentation Status](https://readthedocs.org/projects/xndframes/badge/?version=latest)](https://xndframes.readthedocs.io/en/latest)
 [![codecov](https://codecov.io/gh/andersy005/xndframes/branch/master/graph/badge.svg)](https://codecov.io/gh/andersy005/xndframes)
@@ -33,6 +32,34 @@ Out[8]:
 0    Hello
 1    World
 dtype: string
+
+In [9]: df = pd.DataFrame({'col1': sa})
+
+In [10]: df
+Out[10]:
+    col1
+0  Hello
+1  World
+
+In [11]: df.head()
+Out[11]:
+    col1
+0  Hello
+1  World
+
+In [12]: df.info()
+<class 'pandas.core.frame.DataFrame'>
+RangeIndex: 2 entries, 0 to 1
+Data columns (total 1 columns):
+col1    2 non-null string
+dtypes: string(1)
+memory usage: 96.0 bytes
+
+In [13]: df.isna()
+Out[13]:
+    col1
+0  False
+1  False
 ```
 
 See the [documentation](https://xndframes.readthedocs.io) for more.
