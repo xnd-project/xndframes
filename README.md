@@ -3,7 +3,7 @@
 
 
 [![Build Status](https://travis-ci.org/andersy005/xndframes.svg?branch=master)](https://travis-ci.org/andersy005/xndframes)
-[![Documentation Status](//readthedocs.org/projects/xndframes/badge/?version=latest)](https://xndframes.readthedocs.io/en/latest/?badge=latest)
+[![Documentation Status](https://readthedocs.org/projects/xndframes/badge/?version=latest)](https://xndframes.readthedocs.io/en/latest)
 [![codecov](https://codecov.io/gh/andersy005/xndframes/branch/master/graph/badge.svg)](https://codecov.io/gh/andersy005/xndframes)
 
 Xndframes is a Python package that provides a set of Pandas ExtensionDType/Array implementations backed by [xnd](https://github.com/plures/xnd).
@@ -35,7 +35,7 @@ Out[8]:
 dtype: string
 ```
 
-See the [documentation](https://xndframes.readthedocs.io) for more
+See the [documentation](https://xndframes.readthedocs.io) for more.
 
 ## Try xndframes in the cloud
 
