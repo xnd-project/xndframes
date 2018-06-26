@@ -59,7 +59,8 @@ Missing Data
 
 xnd uses `None` to represent missing values. Xndframes does the same. 
 
-..ipython:: python 
+.. ipython:: python 
 
     df.isna()
+    
     df.dropna()
