@@ -9,7 +9,7 @@ jobs:
       - restore_cache:
           keys:
             - conda-pkgs
-      - run: conda env create
+      - run: conda env create -f ./ci/environment.yml
       - save_cache:
           key: conda-pkgs
           paths:
