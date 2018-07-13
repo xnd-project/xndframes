@@ -1,10 +1,8 @@
 
 # xndframes
-
+[![CircleCI](https://circleci.com/gh/Quansight/xndframes.svg?style=svg)](https://circleci.com/gh/Quansight/xndframes)
 [![Build Status](https://travis-ci.org/Quansight/xndframes.svg?branch=master)](https://travis-ci.org/Quansight/xndframes)
-
 [![Documentation Status](https://readthedocs.org/projects/xndframes/badge/?version=latest)](https://xndframes.readthedocs.io/en/latest)
-
 [![codecov](https://codecov.io/gh/Quansight/xndframes/branch/master/graph/badge.svg)](https://codecov.io/gh/Quansight/xndframes)
 
 Xndframes is a Python package that provides a set of Pandas ExtensionDType/Array implementations backed by [xnd](https://github.com/plures/xnd).
