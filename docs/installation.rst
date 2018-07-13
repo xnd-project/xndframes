@@ -32,13 +32,13 @@ You can either clone the public repository:
 
 .. code-block:: console
 
-    $ git clone git://github.com/andersy005/xndframes
+    $ git clone git://github.com/Quansight/xndframes
 
 Or download the `tarball`_:
 
 .. code-block:: console
 
-    $ curl  -OL https://github.com/andersy005/xndframes/tarball/master
+    $ curl  -OL https://github.com/Quansight/xndframes/tarball/master
 
 Once you have a copy of the source, you can install it with:
 
@@ -47,5 +47,5 @@ Once you have a copy of the source, you can install it with:
     $ python setup.py install
 
 
-.. _Github repo: https://github.com/andersy005/xndframes
-.. _tarball: https://github.com/andersy005/xndframes/tarball/master
+.. _Github repo: https://github.com/Quansight/xndframes
+.. _tarball: https://github.com/Quansight/xndframes/tarball/master

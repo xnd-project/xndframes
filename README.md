@@ -5,7 +5,7 @@
 
 [![Documentation Status](https://readthedocs.org/projects/xndframes/badge/?version=latest)](https://xndframes.readthedocs.io/en/latest)
 
-[![codecov](https://codecov.io/gh/andersy005/xndframes/branch/master/graph/badge.svg)](https://codecov.io/gh/andersy005/xndframes)
+[![codecov](https://codecov.io/gh/Quansight/xndframes/branch/master/graph/badge.svg)](https://codecov.io/gh/Quansight/xndframes)
 
 Xndframes is a Python package that provides a set of Pandas ExtensionDType/Array implementations backed by [xnd](https://github.com/plures/xnd).
 Xnd implements a container type that maps most Python values relevant for scientific computing directly to typed memory.
