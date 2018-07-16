@@ -3,18 +3,18 @@ API
 
 .. currentmodule:: xndframes
 
-Xndframes provides one extension type, :class: `StringArray`
+Xndframes provides one extension type, :class: `XndframesArray`
 
 :class: `String Array`
 ---------------------
-.. autoclass:: StringArray
+.. autoclass:: XndframesArray
 
 Methods
 """""""
 
-Various methods that are useful for pandas. When a Series contains a StringArray,
+Various methods that are useful for pandas. When a Series contains a XndframesArray,
 calling the Series method will dispatch to these methods.
 
-.. automethod:: StringArray.take 
-.. automethod:: StringArray.unique
-.. automethod:: StringArray.isna 
+.. automethod:: XndframesArray.take 
+.. automethod:: XndframesArray.unique
+.. automethod:: XndframesArray.isna 
