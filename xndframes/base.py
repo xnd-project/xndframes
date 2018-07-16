@@ -2,18 +2,123 @@ from __future__ import absolute_import, division, print_function
 
 import itertools
 from collections import Iterable
-
-import ndtypes
 import numpy as np
 import pandas as pd
-import xnd
+import six
 from pandas.api.types import (is_array_like, is_bool_dtype, is_integer,
                               is_integer_dtype)
 from pandas.core.arrays import ExtensionArray
+from pandas.core.dtypes.dtypes import ExtensionDtype
+
+import ndtypes
+import xnd
+from ndtypes import ndt
+
+_python_type_map = {
+    str(ndt("int64").hidden_dtype): int,
+    str(ndt("?int64").hidden_dtype): int,
+    str(ndt("float64").hidden_dtype): float,
+    str(ndt("?float64").hidden_dtype): float,
+    str(ndt("string").hidden_dtype): six.text_type,
+    str(ndt("?string").hidden_dtype): six.text_type,
+}
 
 
-class XndframesArrayBase(ExtensionArray):
+class XndframesDtype(ExtensionDtype):
+    def __init__(self, xnd_dtype):
+        self.xnd_dtype = xnd_dtype
+
+    def __str__(self):
+        return "xndframes[{}]".format(self.xnd_dtype)
+
+    def __repr__(self):
+        return "XndframesDType({})".format(str(self.xnd_dtype))
+
+    def __eq__(self, other):
+        """Check whether 'other' is equal to self.
+        By default, 'other' is considered equal if
+        * it is a string matching 'self.name'.
+        * it is an instance of this type.
+
+        Parameters
+        ----------
+        other: Any
+
+        Returns
+        -------
+        bool
+        """
+        if isinstance(other, six.string_types):
+            return other == self.name
+
+        elif isinstance(other, type(self)):
+            return self.xnd_dtype == other.xnd_dtype
+
+        else:
+            return False
+
+    @property
+    def type(self):
+        # type: () -> type
+        """The scalar type for the array, e.g. ``int``
+        It's expected ``ExtensionArray[item]`` returns an instance
+        of ``ExtensionDtype.type`` for scalar ``item``.
+        """
+        return _python_type_map[str(self.xnd_dtype.hidden_dtype)]
+
+    @property
+    def kind(self):
+        # type () -> str
+        """A character code (one of 'biufcmMOSUV'), default 'O'
+        This should match the NumPy dtype used when the array is
+        converted to an ndarray, which is probably 'O' for object if
+        the extension type cannot be represented as a built-in NumPy
+        type.
+        See Also
+        --------
+        numpy.dtype.kind
+        """
+        return np.dtype(self.type).kind
+
+    @property
+    def name(self):
+        # type: () -> str
+        """A string identifying the data type.
+        Will be used for display in, e.g. ``Series.dtype``
+        """
+        return str(self)
+
+    @classmethod
+    def construct_array_type(cls, *args):
+        """
+        Return the array type associated with this dtype
+        Returns
+        -------
+        type
+        """
+        if len(args) > 0:
+            raise NotImplementedError(
+                "construct_array_type does not support arguments")
+        return XndframesArray
+
+
+class XndframesArray(ExtensionArray):
     _can_hold_na = True
+
+    def __init__(self, array):
+        if isinstance(array, list):
+            self.data = xnd.xnd(array)
+
+        elif isinstance(array, np.ndarray):
+            self.data = xnd.xnd(array.tolist())
+        elif isinstance(array, xnd.xnd):
+            self.data = array
+        else:
+            raise ValueError(
+                "Unsupported type passed for {}: {}".format(
+                    self.__name__, type(array)))
+
+        self._dtype = XndframesDtype(self.data.type)
 
     def __array__(self):
         """
@@ -26,6 +131,35 @@ class XndframesArrayBase(ExtensionArray):
         Length of this array
         """
         return len(self.data)
+
+    @property
+    def dtype(self):
+        # type: () -> ExtensionDtype
+        return self._dtype
+
+    @property
+    def nbytes(self):
+        """
+        Return total bytes consumed by the elements of the array..
+        Does not include memory consumed by non-element attributes
+        of the array object.
+        """
+
+        return self.data.type.datasize
+
+    @property
+    def size(self):
+        """
+        Return the number of elements in the underlying data.
+        """
+        return len(self.data)
+
+    @property
+    def base(self):
+        """
+        The base object of the underlying data.
+        """
+        return self.data
 
     @classmethod
     def _concat_same_type(cls, to_concat):
@@ -248,31 +382,3 @@ class XndframesArrayBase(ExtensionArray):
     def factorize(self, na_sentinel=-1):
         np_array = self.__array__()
         return pd.factorize(np_array, na_sentinel=na_sentinel)
-
-    # -----------------------------------------------------------
-    #                   Properties
-    # -----------------------------------------------------------
-
-    @property
-    def nbytes(self):
-        """
-        Return total bytes consumed by the elements of the array..
-        Does not include memory consumed by non-element attributes
-        of the array object.
-        """
-
-        return self.data.type.datasize
-
-    @property
-    def size(self):
-        """
-        Return the number of elements in the underlying data.
-        """
-        return len(self.data)
-
-    @property
-    def base(self):
-        """
-        The base object of the underlying data.
-        """
-        return self.data
