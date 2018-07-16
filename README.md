@@ -15,15 +15,15 @@ In [1]: import xndframes as xf
 
 In [2]: import pandas as pd
 
-In [3]: s = ["Hello", "World"]
+In [3]: s = ["Hello", "World", None]
 
-In [4]: sa = xf.StringArray(s)
+In [4]: sa = xf.XndframesArray(s)
 
 In [5]: sa.data
-Out[5]: xnd(['Hello', 'World'], type='2 * string')
+Out[5]: xnd(['Hello', 'World', None], type='3 * ?string')
 
 In [6]: sa
-Out[6]: <xndframes.string_array.StringArray at 0x7fde41299128>
+Out[6]: <xndframes.base.XndframesArray at 0x7f836bb349b0>
 
 In [7]: ser = pd.Series(sa)
 
@@ -31,35 +31,33 @@ In [8]: ser
 Out[8]:
 0    Hello
 1    World
-dtype: string
+2     None
+dtype: xndframes[3 * ?string]
 
-In [9]: df = pd.DataFrame({'col1': sa})
+In [9]: df = pd.DataFrame({'strings': sa})
 
 In [10]: df
 Out[10]:
-    col1
-0  Hello
-1  World
+  strings
+0   Hello
+1   World
+2    None
 
-In [11]: df.head()
-Out[11]:
-    col1
-0  Hello
-1  World
-
-In [12]: df.info()
+In [11]: df.info()
 <class 'pandas.core.frame.DataFrame'>
-RangeIndex: 2 entries, 0 to 1
+RangeIndex: 3 entries, 0 to 2
 Data columns (total 1 columns):
-col1    2 non-null string
-dtypes: string(1)
-memory usage: 96.0 bytes
+strings    2 non-null xndframes[3 * ?string]
+dtypes: xndframes[3 * ?string](1)
+memory usage: 104.0 bytes
 
-In [13]: df.isna()
-Out[13]:
-    col1
-0  False
-1  False
+In [12]: df.isna()
+Out[12]:
+   strings
+0    False
+1    False
+2     True
+
 ```
 
 See the [documentation](https://xndframes.readthedocs.io) for more.

@@ -186,6 +186,6 @@ intersphinx_mapping = {
 ipython_execlines = [
     "import numpy as np",
     "import pandas as pd",
-    "import xndframes as xf"
-    "from xndframes import StringArray",
+    "import xndframes as xf",
+    "from xndframes import XndframesArray",
 ]

@@ -17,30 +17,42 @@ We will assume that the following packages have been imported.
 Pandas Integration
 ------------------
 
-So far, xndframes implements ``StringArray``. ``StringArray`` satisfies pandas extension array interface, which means that it can safely be stored inside pandas's 
+So far, xndframes implements ``XndframesArray``. ``XndframesArray`` satisfies pandas extension array interface, which means that it can safely be stored inside pandas's 
 Series and DataFrame. 
 
 .. ipython:: python 
 
-    values = ["Pandas", "NumPy", "xnd", "SciPy", None, "CuPy", None]
-    sa = xf.StringArray(values)
-    type(sa)
-    print(sa.data) 
+    s = ["Pandas", "NumPy", "xnd", "SciPy", None, "CuPy", None, "Keras", "Numba"]
+    packages = xf.XndframesArray(s)
+    type(packages)
+    print(packages.data) 
 
-    ser = pd.Series(sa)
+    ser = pd.Series(packages)
     ser 
-    df = pd.DataFrame({"packages": sa})
-    df
+
+    vals = list(range(9))
+    values = xf.XndframesArray(vals) 
+    ser2 = pd.Series(values)
+    ser2 
+
+    df = pd.DataFrame({"packages": packages, "id": values})
+    df.head()
+    df 
+    df.describe()
 
 Most pandas methods that make sense should work. The following section will call 
 out points of interest. 
 
 .. ipython:: python 
 
-    sa.shape
-    sa.unique()
-    sa.unique().data 
-    sa.isna()
+    packages.shape
+    packages.unique()
+    packages.unique().data 
+    packages.isna()
+
+    df.info()
+
+
 
 
 Indexing
