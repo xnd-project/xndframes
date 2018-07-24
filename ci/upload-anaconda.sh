@@ -21,4 +21,6 @@ echo "UPLOADFILE = ${UPLOADFILE}"
 
 echo "[Upload xndframes]"
 echo ${UPLOADFILE}
-anaconda -t ${UPLOAD_KEY} upload -u intake --force ${UPLOADFILE}
+anaconda -t ${UPLOAD_KEY} upload --force ${UPLOADFILE}
+echo "Successfully deployed to Anaconda.org."
+exit 0
