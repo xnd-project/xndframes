@@ -3,12 +3,12 @@ channels:
   - conda-forge 
   - xnd/label/dev
 dependencies:
-  - python=3
+  - python=3.7
   - numpy 
-  - pandas 
+  - pandas
   - xnd
   - gumath
-  - pytest
+  - pytest==3.6.3
   - black
   - pytest-cov
   - coverage

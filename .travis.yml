@@ -1,55 +1,39 @@
-# Config file for automatic testing at travis-ci.org
-
+sudo: required
+services:
+  - docker
 language: python
-python:
-  - 3.6
+env:
+  global:
+    secure: "qNTIHq86WLOzkZEsWN/vUUyyKjayoaPr1k/bFxr5huJXhvInsBq1a+SAM7ChfRupJRh0yxRC4SoD3J69RSHJLzrkR8oqq0ha/HWvX06BmIQ0Wjnbi7M+bt+tySLLo0pnW/bB/btJF3wGvD1th/1+MiIoxfzF+n4NqpDrJ6vF1W2YLgoi/DpoPe/53RO3/f5GJnryy/Tu/4qIG6gFf1nx0368xy+vw1ZfpoFaUL1gwtZyfga0UZv1C5OylFQ6nXrjyESB12BDql3brGNMf78idEyyb9t0Io3bMOLgyvxeF4UAE7nvevXv7Fr6r718uLg/98d/c+vtIxqXPBL1HEQ2bAFK13zyKb6dzoOHYugaD0/vjWQV20+ee9x/ZlK2pgcWV/ebpov+ocdaqSQ0p8z2PFxrV4ot9QazW+VL4gnS03cWElYFdnMJXPBp7/GykU3i2Dj/golqp8NmxWV7W3rcYhXJ9VTJczlSe0vKtmvxI8OMU+MTRGL/3KYvoF4aT7njMNATO/EoTylbaXNVvfQwAqtNRqP0SWYJrywwQMpEDGExyUGW3QHzK7uGR3zx2HyltkuzKkUo/RshPYp9o/HCQrfmWSWbqYm/VsTL2/1/+Eu2lN3B7ZQZqRO/lZ62a9ShjUyzvFH+uDuMtbzlpBpskXsDaBjEcicbP/8x3HKpJpw="
+
+  matrix:
+  - PYTHON=3.7
 
 before_install:
-  - sudo apt-get update
-  # We do this conditionally because it saves us some downloading if the
-  # version is the same.
-  - if [[ "$TRAVIS_PYTHON_VERSION" == "2.7" ]]; then
-      wget https://repo.continuum.io/miniconda/Miniconda2-latest-Linux-x86_64.sh -O miniconda.sh;
-    else
-      wget https://repo.continuum.io/miniconda/Miniconda3-latest-Linux-x86_64.sh -O miniconda.sh;
-    fi
-  - bash miniconda.sh -b -p $HOME/miniconda
-  - export PATH="$HOME/miniconda/bin:$PATH"
-  - hash -r
-  - conda config --set always_yes yes --set changeps1 no
-  - conda update -q conda
-  # Useful for debugging any issues with conda
-  - conda info -a
-
+  - export PATH="$HOME/miniconda3/bin:$PATH"
 
 install:
-  - conda env create -f ./ci/environment.yml
-  - source activate xndframes
-  - echo "[install xndframes]"
-  - pip install --no-deps -e .
-
+  - ./ci/install-travis.sh
 script:
+  - echo "script start"
+  - source activate xndframes
   - py.test --junitxml=test-reports/junit.xml --cov=./
 
 after_success:
-  - bash <(curl -s https://codecov.io/bash)
-  - codecov
+- bash <(curl -s https://codecov.io/bash)
+- source ./ci/build.sh
+- source ./ci/upload-anaconda.sh 
 
-# Assuming you have installed the travis-ci CLI tool, after you
-# create the Github repo and add it to Travis, run the
-# following command to finish PyPI deployment setup:
-# $ travis encrypt --add deploy.password
-deploy:
-  provider: pypi
-  distributions: sdist bdist_wheel
-  user: andersy005
-  password:
-    secure: s4uQXv+SakusVDoPTI5W2VsBkC69UWAAGJynJKQLoD3RIK7abN5goxXLMHlgPl4VTK8eTnu7gmuJ9dSsGmNcthG6d7kUEHRZQmTiMaxXty3YSLtnvAaN5nME2LscApJ+BLBTzDy5haV8+D+qUnYFvh57L8GqQrcWXYCZfWHHD0biQIGC39+MyYwCxuFKgWlm2GrG8SdY352AgkXBF8Nd6N+zbIMSZuIC3+CMU7YVlGcLapg3Ii9Xh15dX1SC1fJTTrn9XdNHD/O7XmOUZAbcOKdZdc4EdRmje2mXdJZbtIInUXMeuT3YLCve+2xkftdZFal3PfEXFui1E0jrN5P6LG1R3ohUSUEl7Io7PTh+LOKpIwXMWeFnLIkK8eQpeJ1EwdYu+tka9krbJa2WIC0+bm+T1dJbnAH+OGlr60YL6GxxtFMN0NTOJesPGaKI7gEpW6M4fXOluVH85kBphR8qB1bsaDd3e5xnjo4R4B/Z39mNQLSfl2n/DhkXd6q1eDKUzUCnso0krRub/2RZMn2evlPLrM3AW4Ab8P/oJhDZvPRjw2e5f16CpoZbhfaEi6edh5cPo4XJV6XVQ4cym66DBl2V0odYWEnBwEBkdUr7Ly/++rL4SHJeRhAjMzu0YSyo/Lw3RU3X3CJ6pWUGVDMwV2IEQPNFCMjOPTW5fNRkxPs=
 
-  on:
-    tags: true
-    repo: andersy005/xndframes
-    python: 3.6
-
+#deploy:
+#  provider: pypi
+#  distributions: sdist bdist_wheel
+#  user: andersy005
+#  secure: s4uQXv+SakusVDoPTI5W2VsBkC69UWAAGJynJKQLoD3RIK7abN5goxXLMHlgPl4VTK8eTnu7gmuJ9dSsGmNcthG6d7kUEHRZQmTiMaxXty3YSLtnvAaN5nME2LscApJ+BLBTzDy5haV8+D+qUnYFvh57L8GqQrcWXYCZfWHHD0biQIGC39+MyYwCxuFKgWlm2GrG8SdY352AgkXBF8Nd6N+zbIMSZuIC3+CMU7YVlGcLapg3Ii9Xh15dX1SC1fJTTrn9XdNHD/O7XmOUZAbcOKdZdc4EdRmje2mXdJZbtIInUXMeuT3YLCve+2xkftdZFal3PfEXFui1E0jrN5P6LG1R3ohUSUEl7Io7PTh+LOKpIwXMWeFnLIkK8eQpeJ1EwdYu+tka9krbJa2WIC0+bm+T1dJbnAH+OGlr60YL6GxxtFMN0NTOJesPGaKI7gEpW6M4fXOluVH85kBphR8qB1bsaDd3e5xnjo4R4B/Z39mNQLSfl2n/DhkXd6q1eDKUzUCnso0krRub/2RZMn2evlPLrM3AW4Ab8P/oJhDZvPRjw2e5f16CpoZbhfaEi6edh5cPo4XJV6XVQ4cym66DBl2V0odYWEnBwEBkdUr7Ly/++rL4SHJeRhAjMzu0YSyo/Lw3RU3X3CJ6pWUGVDMwV2IEQPNFCMjOPTW5fNRkxPs=
+#  password: 
+#  on:
+#    tags: true
+#    repo: andersy005/xndframes
+#    python: 3.6
 notifications:
   email: false
