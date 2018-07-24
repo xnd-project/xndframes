@@ -3,7 +3,7 @@ channels:
   - conda-forge 
   - xnd/label/dev
 dependencies:
-  - python=3
+  - python
   - numpy 
   - pandas 
   - xnd
