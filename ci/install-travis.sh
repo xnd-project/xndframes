@@ -23,17 +23,18 @@ conda install -q conda-build anaconda-client --yes
 echo
 echo "[install dependencies]"
 
-conda create -q -n xndframes python=${PYTHON} \
-      -c conda-forge -c xnd/label/dev \
-      pandas==0.23.0 \
-      numpy \
-      xnd \
-      gumath \
-      pytest \
-      black \
-      pytest-cov \
-      coverage \
-      flake 8
+conda create -q -n xndframes python=${PYTHON}
+
+cond install -c conda-forge -c xnd/label/dev \
+                pandas==0.23.0 \
+                numpy \
+                xnd \
+                gumath \
+                pytest \
+                black \
+                pytest-cov \
+                coverage \
+                flake8
 
 
 source activate xndframes
