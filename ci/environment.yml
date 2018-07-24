@@ -3,9 +3,9 @@ channels:
   - conda-forge 
   - xnd/label/dev
 dependencies:
-  - python
+  - python=3.7
   - numpy 
-  - pandas==0.23.0
+  - pandas
   - xnd
   - gumath
   - pytest
