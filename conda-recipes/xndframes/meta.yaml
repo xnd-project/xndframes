@@ -1,9 +1,9 @@
 package:
     name: xndframes
-    version: {{ GIT_DESCRIBE_TAG }}
+    version: {{ environ.get('GIT_DESCRIBE_TAG', '') }}
 
 build:
-    number: {{ GIT_DESCRIBE_NUMBER }}
+    number: {{ environ.get('GIT_DESCRIBE_NUMBER', 0) }}
     {% if GIT_DESCRIBE_NUMBER|int == 0 %}string: py{{ CONDA_PY }}_0
     {% else %}string: py{{ CONDA_PY }}_{{ GIT_BUILD_STR }}{% endif %}
     script: python setup.py install --single-version-externally-managed --record=record.txt
@@ -13,14 +13,14 @@ source:
 
 requirements:
   build:
-    - python
+    - python =={{ PY_VER }}
     - setuptools_scm
     - setuptools >=3.3
     - xnd 
 
   run:
+    - python =={{ PY_VER }}
     - pandas >=0.23.0
-    - python
     - setuptools >=3.3
     - xnd 
 
