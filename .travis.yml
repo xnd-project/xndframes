@@ -21,6 +21,7 @@ script:
   - py.test --junitxml=test-reports/junit.xml --cov=./
 
 after_success:
+- source activate xndframes
 - bash <(curl -s https://codecov.io/bash)
 - codecov
 - source ./ci/build.sh
