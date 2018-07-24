@@ -12,8 +12,8 @@ dependencies:
   - pandas >=0.23.0
   - pytest
   - pytest-cov
-  - python=3.6
+  - python=3.7
   - sphinx
   - sphinx_rtd_theme
   - xnd
-  - gumath
+
