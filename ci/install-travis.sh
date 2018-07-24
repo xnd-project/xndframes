@@ -24,7 +24,7 @@ echo
 echo "[install dependencies]"
 
 conda create -q -n xndframes python=${PYTHON} \
-      -c conda-forge -c xnd/label/dev 
+      -c conda-forge -c xnd/label/dev \
       pandas==0.23.0 \
       numpy \
       xnd \
