@@ -8,7 +8,6 @@ env:
 
   matrix:
   - PYTHON=3.7
-  - PYTHON=3.6
 
 before_install:
   - export PATH="$HOME/miniconda3/bin:$PATH"
@@ -21,9 +20,7 @@ script:
   - py.test --junitxml=test-reports/junit.xml --cov=./
 
 after_success:
-- source activate xndframes
 - bash <(curl -s https://codecov.io/bash)
-- codecov
 - source ./ci/build.sh
 - source ./ci/upload-anaconda.sh 
 
