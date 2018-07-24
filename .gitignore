@@ -104,3 +104,4 @@ ENV/
 notes/
 .vscode/
 scripts/
+sdist-v/
