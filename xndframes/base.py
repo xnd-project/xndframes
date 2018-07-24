@@ -5,8 +5,7 @@ from collections import Iterable
 import numpy as np
 import pandas as pd
 import six
-from pandas.api.types import (is_array_like, is_bool_dtype, is_integer,
-                              is_integer_dtype)
+from pandas.api.types import is_array_like, is_bool_dtype, is_integer, is_integer_dtype
 from pandas.core.arrays import ExtensionArray
 from pandas.core.dtypes.dtypes import ExtensionDtype
 

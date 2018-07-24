@@ -23,8 +23,21 @@ conda install -q conda-build anaconda-client --yes
 echo
 echo "[install dependencies]"
 
-conda env create -f environment.yml
+conda create -q -n xndframes python=${PYTHON} \
+      -c conda-forge -c xnd/label/dev 
+      pandas==0.23.0 \
+      numpy \
+      xnd \
+      gumath \
+      pytest \
+      black \
+      pytest-cov \
+      coverage \
+      flake 8
+
+
 source activate xndframes
+
 conda list xndframes
 
 

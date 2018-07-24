@@ -13,8 +13,7 @@ def test_codestyle():
             os.path.abspath(
                 os.path.join(
                     basedir,
-                    "*.py"))) +
-        glob.glob(
+                    "*.py"))) + glob.glob(
             os.path.abspath(
                 os.path.join(
                     basedir,
