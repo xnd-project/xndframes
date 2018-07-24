@@ -23,7 +23,7 @@ conda install -q conda-build anaconda-client --yes
 echo
 echo "[install dependencies]"
 
-conda env create -f ./environment.yml
+conda env create -f environment.yml
 source activate xndframes
 conda list xndframes
 
