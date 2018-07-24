@@ -24,7 +24,7 @@ echo
 echo "[install dependencies]"
 
 conda create -q -n xndframes python=${PYTHON}
-
+source activate xndframes
 conda install -c conda-forge -c xnd/label/dev \
                 pandas==0.23.0 \
                 numpy \
@@ -37,7 +37,6 @@ conda install -c conda-forge -c xnd/label/dev \
                 flake8
 
 
-source activate xndframes
 
 conda list xndframes
 
