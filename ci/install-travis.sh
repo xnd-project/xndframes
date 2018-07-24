@@ -26,7 +26,7 @@ echo "[install dependencies]"
 conda create -q -n xndframes python=${PYTHON}
 source activate xndframes
 conda install -c conda-forge -c xnd/label/dev \
-                pandas==0.23.0 \
+                pandas\
                 numpy \
                 xnd \
                 gumath \

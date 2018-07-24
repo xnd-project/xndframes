@@ -17,8 +17,7 @@ install:
   - ./ci/install-travis.sh
 script:
   - echo "script start"
-  - source activate xndframes 
-  - flake8
+  - source activate xndframes
   - py.test --junitxml=test-reports/junit.xml --cov=./
   - source ./ci/build.sh
 
