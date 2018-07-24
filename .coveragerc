@@ -1,6 +1,6 @@
 [run]
 omit = 
-    tests/.*py 
+    tests/
     xndframes/_version.py
     versioneer.py
 
