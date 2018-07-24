@@ -8,7 +8,7 @@ dependencies:
   - pandas
   - xnd
   - gumath
-  - pytest
+  - pytest==3.6.3
   - black
   - pytest-cov
   - coverage

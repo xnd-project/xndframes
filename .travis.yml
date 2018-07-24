@@ -8,6 +8,7 @@ env:
 
   matrix:
   - PYTHON=3.7
+  - PYTHON=3.6
 
 before_install:
   - export PATH="$HOME/miniconda3/bin:$PATH"

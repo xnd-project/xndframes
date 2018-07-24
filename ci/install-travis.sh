@@ -30,7 +30,7 @@ conda install -c conda-forge -c xnd/label/dev \
                 numpy \
                 xnd \
                 gumath \
-                pytest \
+                pytest==3.6.3 \
                 black \
                 pytest-cov \
                 coverage \
