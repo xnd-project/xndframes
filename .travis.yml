@@ -7,7 +7,6 @@ env:
     secure: "qNTIHq86WLOzkZEsWN/vUUyyKjayoaPr1k/bFxr5huJXhvInsBq1a+SAM7ChfRupJRh0yxRC4SoD3J69RSHJLzrkR8oqq0ha/HWvX06BmIQ0Wjnbi7M+bt+tySLLo0pnW/bB/btJF3wGvD1th/1+MiIoxfzF+n4NqpDrJ6vF1W2YLgoi/DpoPe/53RO3/f5GJnryy/Tu/4qIG6gFf1nx0368xy+vw1ZfpoFaUL1gwtZyfga0UZv1C5OylFQ6nXrjyESB12BDql3brGNMf78idEyyb9t0Io3bMOLgyvxeF4UAE7nvevXv7Fr6r718uLg/98d/c+vtIxqXPBL1HEQ2bAFK13zyKb6dzoOHYugaD0/vjWQV20+ee9x/ZlK2pgcWV/ebpov+ocdaqSQ0p8z2PFxrV4ot9QazW+VL4gnS03cWElYFdnMJXPBp7/GykU3i2Dj/golqp8NmxWV7W3rcYhXJ9VTJczlSe0vKtmvxI8OMU+MTRGL/3KYvoF4aT7njMNATO/EoTylbaXNVvfQwAqtNRqP0SWYJrywwQMpEDGExyUGW3QHzK7uGR3zx2HyltkuzKkUo/RshPYp9o/HCQrfmWSWbqYm/VsTL2/1/+Eu2lN3B7ZQZqRO/lZ62a9ShjUyzvFH+uDuMtbzlpBpskXsDaBjEcicbP/8x3HKpJpw="
 
   matrix:
-  - PYTHON=3.6
   - PYTHON=3.7
 
 before_install:
