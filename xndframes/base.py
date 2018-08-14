@@ -23,7 +23,7 @@ _python_type_map = {
 }
 
 
-class XndframesDtype(ExtensionDtype):
+class Dtype(ExtensionDtype):
     def __init__(self, xnd_dtype):
         self.xnd_dtype = xnd_dtype
 
@@ -31,7 +31,7 @@ class XndframesDtype(ExtensionDtype):
         return "xndframes[{}]".format(self.xnd_dtype)
 
     def __repr__(self):
-        return "XndframesDType({})".format(str(self.xnd_dtype))
+        return "Dtype({})".format(str(self.xnd_dtype))
 
     def __eq__(self, other):
         """Check whether 'other' is equal to self.
@@ -98,10 +98,10 @@ class XndframesDtype(ExtensionDtype):
         if len(args) > 0:
             raise NotImplementedError(
                 "construct_array_type does not support arguments")
-        return XndframesArray
+        return Array
 
 
-class XndframesArray(ExtensionArray):
+class Array(ExtensionArray):
     _can_hold_na = True
 
     def __init__(self, array):
@@ -117,7 +117,7 @@ class XndframesArray(ExtensionArray):
                 "Unsupported type passed for {}: {}".format(
                     self.__name__, type(array)))
 
-        self._dtype = XndframesDtype(self.data.type)
+        self._dtype = Dtype(self.data.type)
 
     def __array__(self):
         """

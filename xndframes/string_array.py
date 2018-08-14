@@ -5,15 +5,15 @@ from __future__ import absolute_import, division, print_function
 
 import pandas as pd
 
-from .base import XndframesArray
+from .base import Array
 
 
 @pd.api.extensions.register_series_accessor("text")
 class TextAccessor:
     def __init__(self, obj):
-        if not isinstance(obj.values, XndframesArray):
+        if not isinstance(obj.values, Array):
             raise AttributeError(
-                "only XndframesArray[string] has text accessor")
+                "only Array[string] has text accessor")
         self.obj = obj
         self.data = self.obj.values.data
 
