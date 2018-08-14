@@ -3,13 +3,20 @@ channels:
   - conda-forge 
   - xnd/label/dev
 dependencies:
-  - python=3.7
+  - python==3.6
   - numpy 
   - pandas
   - xnd
   - gumath
-  - pytest==3.6.3
+  - pytest
   - black
   - pytest-cov
   - coverage
   - flake8
+  - numba
+  - ipython
+  - matplotlib
+  - numpydoc
+  - pandas >=0.23.0
+  - sphinx
+  - sphinx_rtd_theme
